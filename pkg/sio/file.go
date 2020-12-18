@@ -13,6 +13,21 @@ func FSeek(f *os.File, o int64, w int) int64 {
 	}
 }
 
+func FReaddir(f *os.File, n int) []os.FileInfo {
+	if fis, err := f.Readdir(n); err != nil {
+		panic(err)
+	} else {
+		return fis
+	}
+}
+
+func FReadDirAll(filename string) []os.FileInfo {
+	f := OsOpen(filename)
+	fis := FReaddir(f, 0)
+	FClose(f)
+	return fis
+}
+
 func FRead(f *os.File, buf []byte) int {
 	if n, err := f.Read(buf); err != nil && err != io.EOF {
 		panic(err)

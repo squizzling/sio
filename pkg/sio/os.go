@@ -45,3 +45,11 @@ func OsRename(from, to string) {
 		panic(err)
 	}
 }
+
+func OsLstat(filename string) os.FileInfo {
+	if fi, err := os.Lstat(filename); err != nil {
+		panic(err)
+	} else {
+		return fi
+	}
+}
